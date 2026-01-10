@@ -10,11 +10,26 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @ResponseBody
 public class HelloworldController {
   
-@GetMapping(value = "/bootcamp") // "/" is needed
+  //! Bridge between client side and server side -> API
+@GetMapping(value = "/bootcamp") // "/" is needed    try: "/hongkong/bootcamp" + change web address
   public String hello(){
+    System.out.println("How are you?"); //! not shown in client side, only in gitbash/log
+    //2ms, not used in normal case
+    //-> use in error case (try/catch)
     return "Helloworld";
 
-    //save -> .java, mvn spring-boot:run (run .jar)
-    //go to http://localhost:8080/bootcamp
   }
-}
+    //save .java, gitbash: cd to folder, mvn spring-boot:run (run .jar)  start server
+    //go to http://localhost:8080/bootcamp   <---client side
+                              // ^ value = "/bootcamp"
+    //localhost IP: 127.0.0.1
+    //port: 8080
+    //stop server: ctrl + C
+    
+    //  ---> : asscess  IP
+    //client A ----message--->Whatsapp server----message--->clientB
+    //client A <---double ticks---Whatsapp server <---Readed---clientB
+
+
+  }
+
