@@ -3,10 +3,14 @@ package com.bootcamp.demo.demo_basic_api.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @ResponseBody
+@RequestMapping(value = "/calculator")  // @GetMapping(value = "/calculator/....")
+                                                             //  ^ put this to here, prevent redundence
 
 //API = Application Programming interface
 
@@ -18,7 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 //@PathVariable(value = "x") Integer salary
 
 public class CalculatorController {   //file name must have xxxController  
-  @GetMapping(value = "/calculator/sum/{x}/{y}")  //inside {} are variables
+  @GetMapping(value = "/sum/{x}/{y}")  //inside {} are variables
   public int sum(@PathVariable(value = "x") Integer salary, @PathVariable(value = "y") Integer bonus){
     //must not use primitives
    //variebles may be null
@@ -29,11 +33,18 @@ public class CalculatorController {   //file name must have xxxController
                                       //try @PathVariable LocalDate x -> error (3 is not LocalDate)
   }
 
-  @GetMapping(value = "/calculator/subtract/{x}/{y}") //! cannot be same pathway as sum (->add /subtract/)
+  @GetMapping(value = "/subtract/{x}/{y}") //! cannot be same pathway as sum (->add /subtract/)
    //try: same pathway -> see gitbash, search "cause by"-> "Ambiguous mapping"
    //!not show error(red underline) on JDK
   public int subtract(@PathVariable Integer x, @PathVariable Integer y){
     return x - y;
   }
   
+  //! @RequestParm
+@GetMapping(value = "/multiply") 
+   // http://localhost:8080/calculator/multiply?x=3&y=10
+   //!not show error(red underline) on JDK
+  public int multiply(@RequestParam Integer x, @RequestParam Integer y){
+    return x * y;
+  }
 }
