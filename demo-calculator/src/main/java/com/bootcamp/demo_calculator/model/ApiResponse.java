@@ -1,24 +1,21 @@
 package com.bootcamp.demo_calculator.model;
 
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 
 
 
 @Getter
-
+@AllArgsConstructor
 @Builder
 
 public class ApiResponse {
-
-    public static Object builder() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-  private String x;
-  private String y;
-  private String operation;
-  private String result;
+  private final String x;
+  private final String y;
+  private final String operation;
+  private final String result;
   
   
 }
