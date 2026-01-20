@@ -3,6 +3,7 @@ package com.bootcampsb.demo_sbpratice.model;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import lombok.Getter;
@@ -18,7 +19,7 @@ public class Order {
 
 public void addItem(Item item){
   this.list.add(item);
-   this.updateTime = item.getAddTime();
+   this.updateTime = list.stream().max(Comparator.comparing(Item::getAddTime)).get().getAddTime();
 }
 
 }

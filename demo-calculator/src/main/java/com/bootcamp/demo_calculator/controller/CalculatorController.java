@@ -20,13 +20,13 @@ import com.bootcamp.demo_calculator.service.CalculatorService;
    //simutaneously 1000000users visit-> memory enough?
      //Object in spring boot -> stateless
      //if no spring boot-> create new Object x1000000 times -> memory demanded to store 10000000objects
-     //Spring boot-> store Object in bean-> no need to release object's memory -> only need one object
+     //Spring boot-> store Object in bean-> no release object's memory -> only need one object
      //see Cat, CatController
 @RestController  //! @Controller + @ResponseBody
 
 public class CalculatorController {
 
-@Autowired   //! if no @autowire -> no injection -> api call calculatorService -> null point exception
+@Autowired   //! if no @autowire -> no injection -> if api call calculatorService -> null point exception
 private CalculatorService calculatorService;
   
   @GetMapping(value = "/operation")
@@ -62,6 +62,7 @@ private CalculatorService calculatorService;
         //TBC
       }
        return DTOMapper.map(request.getX(), request.getY(), request.getOperation(),String.valueOf(result));
+       //Use DTO mapper here = create new ApiResponse object -> encupsilation
 
   }
 

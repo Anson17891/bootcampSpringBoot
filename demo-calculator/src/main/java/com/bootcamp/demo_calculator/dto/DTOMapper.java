@@ -1,9 +1,9 @@
 package com.bootcamp.demo_calculator.dto;
 
-import com.bootcamp.demo_calculator.model.ApiRequest;
 import com.bootcamp.demo_calculator.model.ApiResponse;
-import com.bootcamp.demo_calculator.model.Operation;
 
+
+//Data transfer Object
 public class DTOMapper {
   public static ApiResponse map(String x, String y, String operation, String result){
     return ApiResponse.builder()//
