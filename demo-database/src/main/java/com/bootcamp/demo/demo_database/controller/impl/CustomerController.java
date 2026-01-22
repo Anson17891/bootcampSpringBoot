@@ -15,7 +15,7 @@ public class CustomerController implements CustomerOperation {
   private CustomerService customerService;
   
    @Override
-  public CustomerEntity create(@RequestBody CustomerEntity customerEntity){
+  public CustomerEntity create(CustomerEntity customerEntity){
     return this.customerService.create(customerEntity);
   }
   
