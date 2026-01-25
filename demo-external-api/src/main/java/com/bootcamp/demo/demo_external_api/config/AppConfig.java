@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestTemplate;
 
 import com.bootcamp.demo.demo_external_api.mapper.DtoMapper;
+import com.bootcamp.demo.demo_external_api.mapper.EntityMapper;
 import com.bootcamp.demo.demo_external_api.model.dto.Cat;
 
 
@@ -28,5 +29,10 @@ public class AppConfig {
   @Bean //!Method to become a bean
   DtoMapper dtoMapper(){
     return new DtoMapper();
+  }
+
+  @Bean
+  EntityMapper entityMapper(){
+    return new EntityMapper();
   }
 }

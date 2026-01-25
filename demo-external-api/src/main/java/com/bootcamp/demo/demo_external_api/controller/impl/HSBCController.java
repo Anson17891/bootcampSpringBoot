@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bootcamp.demo.demo_external_api.controller.HSBCOperation;
+import com.bootcamp.demo.demo_external_api.dto.CommentDto;
+import com.bootcamp.demo.demo_external_api.dto.PostDto;
 import com.bootcamp.demo.demo_external_api.dto.UserDto;
 import com.bootcamp.demo.demo_external_api.mapper.DtoMapper;
 import com.bootcamp.demo.demo_external_api.model.dto.Cat;
@@ -24,7 +26,7 @@ public class HSBCController implements HSBCOperation{
 
     // return this.jsonPlaceHolderService.getUsers().stream()// 
     // .map(e->
-    //   {return UserDto.builder().id(e.getId())// !Too long, need a better encupsulation, see DtoMapper
+    //   {return UserDto.builder().id(e.getId())// !Too long, need a better encapsulation, see DtoMapper
     //   .email(e.getEmail()).phone(e.getPhone())//
     //   .name(e.getName()).build();
     // }).collect(Collectors.toList());
@@ -35,5 +37,19 @@ public class HSBCController implements HSBCOperation{
   @Override
   public Cat getCat(){
     return this.jsonPlaceHolderService.getCat();
+  }
+
+  @Override
+  public List<PostDto> getPosts(){
+    return  this.jsonPlaceHolderService.getPosts()//
+    .stream().map(e->this.dtoMapper.postMap(e))//
+    .collect(Collectors.toList());
+  }
+
+@Override
+  public List<CommentDto> getComments(){
+    return  this.jsonPlaceHolderService.getComments()//
+    .stream().map(e->this.dtoMapper.commentMap(e))//
+    .collect(Collectors.toList());
   }
 }

@@ -7,6 +7,7 @@ import lombok.Getter;
 public class UserDTO { //! Customer may not need that much data -> create another DTO (less attribute), see UserDto 
   private Long id;
   private String name;
+  private String userName;
   private String email;
   private Address address;
   private String phone;

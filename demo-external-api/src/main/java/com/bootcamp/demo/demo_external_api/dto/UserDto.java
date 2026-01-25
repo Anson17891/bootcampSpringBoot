@@ -6,7 +6,7 @@ import lombok.Getter;
 
 @Getter
 @Builder
-@AllArgsConstructor
+
 public class UserDto {  //low case of "to", prevent name-crash with DTO
   private Long id;
   private String name;   //let customer require only these attributes
