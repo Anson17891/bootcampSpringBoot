@@ -20,3 +20,19 @@ public class EntityMapper {
                         .build();
   }
 }
+
+
+
+//!Solution
+// @Component  //or @Bean in config
+// public class EntityMapper {
+//   public NineDayEntity map(NineDatEneity.ForecastDTO dto){
+//     return NineDatEntity.builder()//
+//            .forecastDate(dto.getForecastDate())//
+//            .maxTemp(BigDecimal.valueOf(dto.getForecastMaxtemp().getValue()))//
+//            .minTemp(BigDecimal.valueOf(dto.getForecastinxtemp().getValue()))//
+//            .maxRh(BigDecimal.valueOf(dto.getForecastMaxRh().getValue()))//
+//            .minRh(BigDecimal.valueOf(dto.getForecastMinRh().getValue()))//
+//            .build();
+//   }
+// }

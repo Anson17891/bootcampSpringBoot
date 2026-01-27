@@ -72,3 +72,17 @@ inquiryRepository.save(inquiry);
 return weatherForecasts;
 } 
 }
+
+
+
+//!Solution
+// @Servicepubic class WeatherServiceImpl implements WeatherService{
+//  @Autowired
+// private NineDayService nineDayService;
+
+//   @Override
+//   public WeatherDTO getWeather(DataType dataType, lang lang){
+//        return switch (dataType){
+//           case NINE_DAY}
+//   }
+// }

@@ -20,7 +20,7 @@ public class WeatherDTO {
 
 @Getter
 public static class WeatherForecast{
-  private String forecastDate;
+  private String forecastDate;      
   private String week;
   private String forecastWind;
   private String forecastWeather;
@@ -39,6 +39,8 @@ private int forecastIcon;
 private String PSR;
 
 
+
+
   @Getter
   public static class Temp{
     private String value;
@@ -53,3 +55,58 @@ private String PSR;
 
 }
 }
+
+
+//!Solution
+// @Getter
+// public class NineDayDTO extends WeatherDTO{  //!changed the name, WeatherDTO is a empty abstract class //!Polymorthism
+//  private String generalSituation;
+//  @JsonProperty(value = "weatherForecast")
+//  private List<ForecastDTO> weatherForecasts;
+//  @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ssXXX", timezone = "Asia/Hong_Kong")
+//  private LocalDateTime updateTime;
+//  private ValueDTO2 seaTemp;
+//  @JsonProperty(value = "soilTemp")
+//  private List<ValueDTO2> soilTemps;
+//  
+
+
+//@Getter
+//  public static class ValueDTO2 {
+//  private String place;
+//  private Double value;
+//  private String unit;
+//  @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ssXXX", timezone = "Asia/Hong_Kong")
+//  private LocalDateTime recordTime;
+//  private DepthDTO depth;}
+//
+//  @Getter
+//  public static class DepthDTO{
+// private String unit;
+// private Double value;
+// }
+
+//  public static class ForecastDTO{
+//   @JsonFormat(pattern = "yyyyMMdd")
+//   private LocalDate forecastDate;
+//   private String week;
+//   @JsonProperty(value="forecastWind")
+//   private String wind;
+//   @JsonProperty(value="forecastWeater")
+//   private String description;
+// 
+//   private ValueDTO forecastMaxtemp;
+//   private ValueDTO forecastMintemp;
+//  private ValueDTO forecastMinrh;
+//  private ValueDTO forcastMinrh;
+//  @JsonProperty(value = "ForecastIcon")
+//  private Long forecastIcon;
+//  @JsonProperty(value = "PSR")
+//  private String psr;
+//
+//
+//@Getter
+//public static class ValueDTO{
+// private Double value;
+//  private Stting unit;
+//}

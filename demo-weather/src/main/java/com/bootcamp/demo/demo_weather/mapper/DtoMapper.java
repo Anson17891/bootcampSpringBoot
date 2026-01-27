@@ -18,3 +18,18 @@ public class DtoMapper {
                         .build();
   }
 }
+
+
+//!Solution
+// @Component  //!or @Bean in config
+// public class DtoMapper{
+//   public WeatherDto map(NineDayDTO.ForecastDTO forecastDTO){   //for NineDayDTO, see WeatherDTO
+//     return WeatherDto.builder()//
+//                         .forecastDate(forecastDTO.getForecastDate())//
+//                         .maxTempValue(forecastDTO.getForecastMaxTemp().getValue())//
+//                         .minTempValue(forecastDTO.getForecastMinTemp().getValue())//
+//                         .maxRhValue(forecastDTO.getForecastMaxRh().getValue())//
+//                         .minRhValue(forecastDTO.getForecastMinRh().getValue())//
+//                         .build();
+//   }
+// }

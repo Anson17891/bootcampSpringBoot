@@ -12,3 +12,11 @@ public interface WeatherOperation {
   List<WeatherDto> getWeathers();
   
 }
+
+
+//!Solution
+// public interface WeatherOperation {
+//   @GetMapping(value = "/weathers")
+//   List<NineDayDto> getWeathers(@RequestParam String dataType, @RequestParam String lang);
+  
+// }

@@ -15,6 +15,11 @@ weather:
   data:
     domain: "data.weather.gov.hk"
     path: "/weatherAPI/opendata/weather.php"
+    # or: path-segment: "weatherAPI/opendata"
+    #     path: "weather.php"
     query: 
        dataType: "fnd"
        lang: "en" 
+    # or: dataType:
+    #          nineday: "fnd"
+    #          lang: "en"

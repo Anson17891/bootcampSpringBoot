@@ -16,3 +16,13 @@ public class WeatherDto {
   private String minRhValue;
   private String minRhUnit;
 }
+//!Solution
+// @Getter
+// @Builder
+// public class NineDayDto {
+//   private LocalDate forecastDate;
+//   private Double maxTemp;
+//   private Double minTemp;
+//   private Double maxRh;
+//   private Double minRh;
+// }

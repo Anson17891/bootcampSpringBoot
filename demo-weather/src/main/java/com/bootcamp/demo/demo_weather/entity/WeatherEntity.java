@@ -19,12 +19,12 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
-@Builder
+@Builder  //for Mapper
 @Table(name = "nine_day_forecast")
 public class WeatherEntity {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long id;              //Three must syntax
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "inquiry_id", nullable = false)
@@ -55,3 +55,34 @@ public class WeatherEntity {
   private String minRhUnit;
 
 }
+
+
+
+//!Solution
+
+// @Entity
+// @AllArgsConstructor
+// @NoArgsConstructor
+// @Getter
+// @Builder  //for Mapper
+// @Table(name = "nine_day_forecast")
+// public class NineDayEntity {
+//   @Id
+//   @GeneratedValue(strategy = GenerationType.IDENTITY)
+//     private Long id;              //Three must syntax
+//    @Setter
+//   private LocalDateTime tranTime;  //! For recording inquiry
+
+ //API result
+//   @Column(name = "forecast_date")
+//   private LocalDate ForecastDate;
+//   @Column(name = "max_temp", precision = 5, scale = 2)  //decimal(5,2)  ,<- that's why use BD
+//   private BigDecimal maxTemp;
+//   @Column(name = "min_temp", precision = 5, scale = 2)
+//   private BigDecimal minTemp;
+//   @Column(name = "max_rh", precision = 5, scale = 2) 
+//   private BigDecimal maxRh;
+//   @Column(name = "max_temp", precision = 5, scale = 2) 
+//   private BigDecimal minRh;
+
+// }
