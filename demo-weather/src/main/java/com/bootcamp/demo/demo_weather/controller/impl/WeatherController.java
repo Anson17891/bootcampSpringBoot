@@ -36,6 +36,8 @@ public class WeatherController implements WeatherOperation{
 //   private WeatherService weatherService;
 //   @Autowired
 //   private DtoMapper dtoMapper;
+//   @Autowired
+//   private NineDayService nineDayService;
 
 //   @Override
 //    List<NineDayDto> getWeathers(@RequestParam String dataType, @RequestParam String lang){
@@ -49,4 +51,21 @@ public class WeatherController implements WeatherOperation{
 //                  .map(e-> this.dtoMapper.map(e))//
 //                  .collect(Collectors.toList());
 //}
+
+//@Override
+// public ResponseEntity<NineDayEntity> findByForecastDate(LocalDate forecastDate);
+//    NineDayEntity nineDayEntity =this.nineDayService.findByForecastDate(forecastDate);
+//    return ResponseEntity.ok(nineDayEntity);
+
+//@Override
+// public ResponseEntity<NineDayEntity> findByMaxTempGreaterThanEqual(Double degree);
+//    NineDayEntity nineDayEntity =this.nineDayService.findByMaxTempGreaterThanEqual(degree);
+//    return ResponseEntity.ok(nineDayEntity);
+
+//@Override
+// public ResponseEntity<NineDayEntity> findByTranTimeBetween(LocalDateTime startDateTime, LocalDateTime endDateTime);
+//    NineDayEntity nineDayEntity =this.nineDayService.findByTranTimeBetween(startDateTime, endDateTime);
+//    return ResponseEntity.ok(nineDayEntity);
+
+
 // }

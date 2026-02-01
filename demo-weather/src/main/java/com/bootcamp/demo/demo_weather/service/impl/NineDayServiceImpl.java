@@ -50,6 +50,18 @@ package com.bootcamp.demo.demo_weather.service.impl;
 // return nineDayDTO;
 
 // }
+
+//@Override
+// public List<NineDayEntity> findByForecastDate(LocalDate forecastDate){
+//      return this.nineDayRepository.findByForecaseDate(forecastDate);}
+
+//@Override
+// public List<NineDayEntity> findByMaxTempGreaterThanEqual(Double degree){
+//      return this.neatherRepository.findByMaxTempGreaterThanEqual(degree);}
+
+//@Override
+// public List<NineDayEntity> findByTranTimeBetween(LocalDateTime startDateTime, LocalDateTime endDateTime){
+//    return this.neatherRepository.findByTranTimeBetween(startDateTime, endDateTime);}
   
 // }
 

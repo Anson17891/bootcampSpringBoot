@@ -17,8 +17,10 @@ public class OrderServiceimpl implements OrderService {
   private CustomerRepository customerRepository;
 
 @Override
-  public abstract OrderEntity create(OrderEntity orderEntity){
- CustomerEntity customerEntity = this.customerRepository.findById(customerId).orElseThrow(() -> new IllegalArgumentException("Customer Id Not Found"));
+  public OrderEntity create(Long customerId, OrderEntity orderEntity){
+ CustomerEntity customerEntity = this.customerRepository.findById(customerId)//
+ .orElseThrow(() -> new IllegalArgumentException("Customer Id Not Found"));
+ orderEntity.setCustomerEntity(customerEntity);
  return this.orderRepository.save(orderEntity);
 }
 

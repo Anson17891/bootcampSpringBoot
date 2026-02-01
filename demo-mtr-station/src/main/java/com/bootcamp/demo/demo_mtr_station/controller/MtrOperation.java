@@ -1,8 +1,5 @@
 package com.bootcamp.demo.demo_mtr_station.controller;
 
-import java.util.List;
-import java.util.Map;
-
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,8 +8,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bootcamp.demo.demo_mtr_station.dto.EarliestScheduleDTO;
+import com.bootcamp.demo.demo_mtr_station.dto.LineSignalDTO;
 import com.bootcamp.demo.demo_mtr_station.entity.StationEntity;
-import com.bootcamp.demo.demo_mtr_station.model.Train;
 import com.bootcamp.demo.demo_mtr_station.model.dto.ScheduleDTO;
 
 
@@ -46,4 +43,12 @@ public interface MtrOperation {
 
 @GetMapping("/mtr/schedulemap")
 EarliestScheduleDTO getEarliestSchedule(@RequestParam String line, @RequestParam String station);
+
+
+@GetMapping("/mtr/signal")
+LineSignalDTO getLineSignal(@RequestParam String line);
+
 }
+
+
+

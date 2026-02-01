@@ -4,21 +4,22 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
-import org.springframework.beans.factory.annotation.Value;
 
 import com.bootcamp.demo.demo_mtr_station.entity.LineEntity;
 import com.bootcamp.demo.demo_mtr_station.entity.StationEntity;
+import com.bootcamp.demo.demo_mtr_station.mapper.ModelMapper;
 import com.bootcamp.demo.demo_mtr_station.model.Train;
 import com.bootcamp.demo.demo_mtr_station.model.dto.ScheduleDTO;
 import com.bootcamp.demo.demo_mtr_station.repository.LineRepository;
 import com.bootcamp.demo.demo_mtr_station.repository.StationRepository;
 import com.bootcamp.demo.demo_mtr_station.service.MtrService;
-import com.bootcamp.demo.demo_mtr_station.mapper.ModelMapper;
 
 @Service
 public class MtrServiceImpl implements MtrService{
@@ -132,6 +133,14 @@ public ScheduleDTO getSchedule(String lineCode, String stationCode){
       LineEntity lineEntity = this.lineRepository.findByCode(lineCode).orElse(null);
       List<StationEntity> stationEntities = this.stationRepository.findByLineEntity(lineEntity);
       //!check each entities code
+      List<ScheduleDTO> scheduleDTO = stationEntities.stream()//
+                     .map(e -> this.getSchedule(lineCode, e.getCode()))//
+                     .collect(Collectors.toList());
+      return scheduleDTO;
+      }
 
+
+
+      
     }
-}
+

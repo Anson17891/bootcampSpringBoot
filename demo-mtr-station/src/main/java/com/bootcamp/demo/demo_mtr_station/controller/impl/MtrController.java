@@ -1,17 +1,17 @@
 package com.bootcamp.demo.demo_mtr_station.controller.impl;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.bootcamp.demo.demo_mtr_station.controller.MtrOperation;
 import com.bootcamp.demo.demo_mtr_station.dto.EarliestScheduleDTO;
+import com.bootcamp.demo.demo_mtr_station.dto.LineSignalDTO;
 import com.bootcamp.demo.demo_mtr_station.entity.StationEntity;
 import com.bootcamp.demo.demo_mtr_station.model.Train;
 import com.bootcamp.demo.demo_mtr_station.model.dto.ScheduleDTO;
@@ -61,4 +61,42 @@ public class MtrController implements MtrOperation{
 //  public Map<String, List<Train>>getScheduleMap(String line, String station){
 //   return this.mtrService.getScheduleMap(line, station);
 //  }
+
+
+
+@Override
+public LineSignalDTO getLineSignal(String line){
+   List<ScheduleDTO> scheduleDTOs = this.mtrService.getByLine(line);
+   List<String> delayedStations = new ArrayList<>();
+   LocalDateTime currTime = scheduleDTOs.getLast().getCurrTime();
+   LocalDateTime sysTime = scheduleDTOs.getLast().getSysTime();
+
+   for(ScheduleDTO s : scheduleDTOs){
+        if(s.getIsDelay().equals("Y")){
+          Set<String> stationCode = s.getData().keySet();
+          stationCode.forEach(key -> 
+            delayedStations.add(key.substring(4)));
+        }
+      }
+
+   String signal = switch(delayedStations.size()){
+    case 0 -> "GREEN";
+    case 1 -> "YELLOW";
+    default -> "RED";
+   };
+  
+   return LineSignalDTO.builder()//
+                       .line(line)//
+                       .signal(signal)//
+                       .delayedStations(delayedStations)//
+                       .currTime(currTime)//
+                       .sysTime(sysTime)//
+                       .build();
+
 }
+
+
+
+
+}
+
