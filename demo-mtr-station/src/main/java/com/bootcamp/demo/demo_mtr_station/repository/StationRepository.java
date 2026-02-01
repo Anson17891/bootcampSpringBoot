@@ -13,9 +13,9 @@ import com.bootcamp.demo.demo_mtr_station.entity.StationEntity;
 
 @Repository
 public interface StationRepository extends JpaRepository<StationEntity, Long>{
-  void deleteAllStations();
+
   Optional<StationEntity> findByCode(String code);
-  void deteleByCode(String code);
+  void deleteByCode(String code);
 
   List<StationEntity> findByLineEntity(LineEntity lineEntity);
 

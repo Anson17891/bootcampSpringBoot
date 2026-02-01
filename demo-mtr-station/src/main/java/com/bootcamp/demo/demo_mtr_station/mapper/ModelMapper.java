@@ -8,7 +8,8 @@ import com.bootcamp.demo.demo_mtr_station.model.dto.ScheduleDTO;
 @Component
 public class ModelMapper {
   public Train map(ScheduleDTO.StationDTO.TrainDTO trainDTO, String direction){
-    return new Train.builder()//
+
+    return Train.builder()//
                     .destination(trainDTO.getDest())//
                     .arriveTime(trainDTO.getTime())//
                     .direction(direction)//

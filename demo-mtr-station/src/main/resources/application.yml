@@ -15,4 +15,4 @@ external-api:
   mtr:
     domain: "rt.data.gov.hk"
     path-segment: "v1/transport/mtr"
-    path: "/getSchedule.php"
+    path: "getSchedule.php"

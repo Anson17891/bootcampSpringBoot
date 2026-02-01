@@ -1,12 +1,5 @@
 package com.bootcamp.demo.demo_mtr_station.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
 import com.bootcamp.demo.demo_mtr_station.dto.EarliestScheduleDTO;
 import com.bootcamp.demo.demo_mtr_station.dto.LineSignalDTO;
 import com.bootcamp.demo.demo_mtr_station.entity.StationEntity;
@@ -14,13 +7,12 @@ import com.bootcamp.demo.demo_mtr_station.model.dto.ScheduleDTO;
 
 
 
-@RestController
+
 public interface MtrOperation {
 
 
 
-  @PostMapping("/line/{code}/station")
-  StationEntity createStation(@PathVariable String lineCode, @RequestBody StationEntity stationEntity); 
+  StationEntity createStation(String lineCode,StationEntity stationEntity); 
  //usually not directly create entity, but DTO(with desinated fields)
 
 
@@ -35,18 +27,17 @@ public interface MtrOperation {
 //  void deleteByLineCode(@PathVariable String code);
  
 
- @GetMapping("/mtr/schedule")
- ScheduleDTO getSchedule(@RequestParam String line, @RequestParam String station);
+
+ ScheduleDTO getSchedule(String line, String station);
  
 //  @GetMapping("/mtr/schedulemap")   //should not give customer Map with full data
 //  Map<String, List<Train>> getScheduleMap(@RequestParam String line, @RequestParam String station);
 
-@GetMapping("/mtr/schedulemap")
-EarliestScheduleDTO getEarliestSchedule(@RequestParam String line, @RequestParam String station);
+EarliestScheduleDTO getEarliestSchedule(String line, String station);
 
 
-@GetMapping("/mtr/signal")
-LineSignalDTO getLineSignal(@RequestParam String line);
+
+LineSignalDTO getLineSignal(String line);
 
 }
 

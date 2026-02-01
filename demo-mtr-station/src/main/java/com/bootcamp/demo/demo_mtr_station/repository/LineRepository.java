@@ -15,7 +15,7 @@ public interface LineRepository extends JpaRepository<LineEntity, Long>{
   //1. Optional<>
   //2. List<>
   Optional<LineEntity> findByCode(String code);  //in case code not exsist
- void deleteAllLines();
+
   void deleteByCode(String code);
 
   

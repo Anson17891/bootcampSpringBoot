@@ -12,6 +12,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+
 public class Train {
   private String destination;
   private LocalDateTime arriveTime;

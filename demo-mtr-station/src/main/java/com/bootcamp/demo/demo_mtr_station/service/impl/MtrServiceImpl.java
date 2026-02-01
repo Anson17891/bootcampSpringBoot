@@ -27,6 +27,7 @@ public class MtrServiceImpl implements MtrService{
 
   @Autowired
   private RestTemplate restTemplate;
+
   @Autowired
   private LineRepository lineRepository;
 
@@ -40,7 +41,7 @@ public class MtrServiceImpl implements MtrService{
     private String domain;
   @Value(value = "${external-api.mtr.path-segment}")
   private String pathSegment;
-  @Value(value = "${external-api.mtr.data.path}")
+  @Value(value = "${external-api.mtr.path}")
   private String path;
 
 @Override
@@ -51,7 +52,7 @@ public ScheduleDTO getSchedule(String lineCode, String stationCode){
                .pathSegment(pathSegment)//
                .path(path)//
                .queryParam("line", lineCode)//
-               .queryParam("stn", stationCode)//
+               .queryParam("sta", stationCode)//
                .build()//
                .toUriString();
     System.out.println("url=" + url);

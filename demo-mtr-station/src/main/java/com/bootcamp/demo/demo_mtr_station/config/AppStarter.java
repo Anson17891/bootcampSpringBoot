@@ -23,9 +23,10 @@ public class AppStarter implements CommandLineRunner{
   public void run(String... args) throws Exception{
     //! once server starts, run this programme once
     //! ->Pre-check , ensure server runs successfully 
-    
-    this.mtrService.deleteAllLines();   //ensure no insert datas again and again
+   
     this.mtrService.deleteAllStations();
+    this.mtrService.deleteAllLines();   //ensure no insert datas again and again
+    
 
     //insert lines & stations
    this.mtrService.saveLine("AEL", "airport_express");

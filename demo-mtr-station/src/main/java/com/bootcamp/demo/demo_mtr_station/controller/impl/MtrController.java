@@ -8,6 +8,12 @@ import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.bootcamp.demo.demo_mtr_station.controller.MtrOperation;
 import com.bootcamp.demo.demo_mtr_station.dto.EarliestScheduleDTO;
@@ -16,13 +22,14 @@ import com.bootcamp.demo.demo_mtr_station.entity.StationEntity;
 import com.bootcamp.demo.demo_mtr_station.model.Train;
 import com.bootcamp.demo.demo_mtr_station.model.dto.ScheduleDTO;
 import com.bootcamp.demo.demo_mtr_station.service.MtrService;
-
+@RestController
 public class MtrController implements MtrOperation{
 @Autowired
   private MtrService mtrService;
 
+  @PostMapping("/line/{code}/station")
   @Override
-  public StationEntity createStation(String lineCode,StationEntity stationEntity){
+  public StationEntity createStation(@PathVariable String lineCode, @RequestBody StationEntity stationEntity){
 
     return this.mtrService.saveStation(lineCode//
                                       ,stationEntity.getCode()//
@@ -30,14 +37,15 @@ public class MtrController implements MtrOperation{
                                       ,stationEntity.getPrevCode()//
                                       ,stationEntity.getNextCode());
   }
-
+ @GetMapping("/mtr/schedule")
   @Override
-  public ScheduleDTO getSchedule(String line, String station){
+  public ScheduleDTO getSchedule(@RequestParam String line, @RequestParam String station){
     return this.mtrService.getSchedule(line, station);
   }
 
+@GetMapping("/mtr/schedulemap")
   @Override
- public EarliestScheduleDTO getEarliestSchedule(String line, String station){
+ public EarliestScheduleDTO getEarliestSchedule(@RequestParam String line, @RequestParam String station){
   ScheduleDTO scheduleDTO = this.mtrService.getSchedule(line,station);
       EarliestScheduleDTO earliestScheduleDTO = EarliestScheduleDTO.builder()//
                                                                   .currTime(scheduleDTO.getCurrTime())//
@@ -63,16 +71,16 @@ public class MtrController implements MtrOperation{
 //  }
 
 
-
+@GetMapping("/mtr/signal")
 @Override
-public LineSignalDTO getLineSignal(String line){
+public LineSignalDTO getLineSignal(@RequestParam String line){
    List<ScheduleDTO> scheduleDTOs = this.mtrService.getByLine(line);
    List<String> delayedStations = new ArrayList<>();
    LocalDateTime currTime = scheduleDTOs.getLast().getCurrTime();
    LocalDateTime sysTime = scheduleDTOs.getLast().getSysTime();
 
    for(ScheduleDTO s : scheduleDTOs){
-        if(s.getIsDelay().equals("Y")){
+        if(s.getIsDelay()!=null && "Y".equals(s.getIsDelay())){
           Set<String> stationCode = s.getData().keySet();
           stationCode.forEach(key -> 
             delayedStations.add(key.substring(4)));
