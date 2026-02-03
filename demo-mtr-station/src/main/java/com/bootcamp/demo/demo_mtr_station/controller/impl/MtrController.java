@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,7 +13,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.bootcamp.demo.demo_mtr_station.controller.MtrOperation;
 import com.bootcamp.demo.demo_mtr_station.dto.EarliestScheduleDTO;
 import com.bootcamp.demo.demo_mtr_station.dto.LineSignalDTO;
@@ -104,6 +102,72 @@ public LineSignalDTO getLineSignal(@RequestParam String line){
 }
 
 
+
+
+
+//!part3 solution
+// @Override
+// public SignalDto getSignal(@RequestParam String lineCode){
+//   //stations
+//   //loop -> MTR API -> isdelay -> count
+//   //determine signal color
+//   //build signalDTO
+//   List<StationEntity> stationEntities = this.mtrService.getStations(lineCode);
+//   int count = 0;
+//   ScheduleDTO scheduleDTO = null;
+  
+//    for(StationEntity se: stationEntities){
+//   String stationCode = se.getCode();
+//   List<String> delayStations = new ArrayList<>();
+//   scheduleDTO = this.mtrService.getSchedule(lineCode, stationCode);
+//   if("Y".equals(scheduleDTO.getIsDelay())){
+//     count++;
+//     delayStations.add(stationCode);
+//   }
+  
+// }
+//   String signal = "";
+//   if(count >1){
+//     signal = "RED";
+//   }else if(count ==1){
+//     signal = "YELLOW";
+//   }else{signal = "GREEN";}
+
+//    return SignalDto.builder()//
+//                    .line(lineCode)//
+//                    .station(stationCode)//
+//                    .delayStations(delayStations)//
+//                    .currTime(scheduleDTO.currTime)//
+//                    .sysTime(scheduleDTO.sysTime)//
+//                    .build();
+
+// }
+
+
+//!--------3/2/2026-----Redis-------------------
+//Redis  
+// not real-time
+//not business($$$) relate  
+//cache memory
+//->quick access
+//have longer delay(eg second-scale), but not significant/even beneficial
+//read-through (input: cache->database, output:database->cache)
+//multiple access, ....
+//->off-load database work-load
+
+// -usage
+//1. shopping cart (still paying)
+
+//cons:
+//1.
+
+
+
+@Override
+@GetMapping(value = "/line/{lineCode}/stations")
+public List<StationEntity> getStations(@PathVariable String lineCode){
+  return this.mtrService.getStations(lineCode);
+}
 
 
 }

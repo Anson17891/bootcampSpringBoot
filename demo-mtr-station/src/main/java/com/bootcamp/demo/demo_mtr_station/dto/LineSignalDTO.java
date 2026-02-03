@@ -29,5 +29,20 @@ public class LineSignalDTO{
     private LocalDateTime sysTime;
 
 
+
     
 }
+//!part3 solution
+// @Getter
+// @Builder
+// public class SignalDto{
+//   private String line;
+//   private String signal;
+//   private List<String> delayStations;
+//   @JsonProperty(value = "curr_time")
+//    @JsonFormat(pattern = "yyyyMMdd HH:mm:ss")
+//   private LocalDateTime currTime;
+//   @JsonProperty(value = "sys_time")
+//    @JsonFormat(pattern = "yyyyMMdd HH:mm:ss")
+//     private LocalDateTime sysTime;
+// }

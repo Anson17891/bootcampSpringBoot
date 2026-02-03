@@ -27,4 +27,7 @@ public interface MtrService {
   
   List<ScheduleDTO> getByLine(String lineCode);
   
+
+  //!part3 solution
+  List<StationEntity> getStations(String lineCode);
 }

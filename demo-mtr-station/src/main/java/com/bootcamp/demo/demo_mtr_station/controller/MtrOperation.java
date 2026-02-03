@@ -5,7 +5,7 @@ import com.bootcamp.demo.demo_mtr_station.dto.LineSignalDTO;
 import com.bootcamp.demo.demo_mtr_station.entity.StationEntity;
 import com.bootcamp.demo.demo_mtr_station.model.dto.ScheduleDTO;
 
-
+import java.util.*;
 
 
 public interface MtrOperation {
@@ -39,6 +39,18 @@ EarliestScheduleDTO getEarliestSchedule(String line, String station);
 
 LineSignalDTO getLineSignal(String line);
 
+
+
+
+//!part3 solution
+// @GerMapping(value = "/signal")
+// SignalDto getSignal(@RequestParam String lineCode);
+
+
+//------------3/2/2026------------------------
+
+
+List<StationEntity> getStations(String lineCode);
 }
 
 

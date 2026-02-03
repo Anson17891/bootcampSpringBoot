@@ -1,6 +1,8 @@
 package com.bootcamp.demo.demo_mtr_station.service.impl;
 
+import java.time.Duration;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,6 +10,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -20,6 +23,8 @@ import com.bootcamp.demo.demo_mtr_station.model.dto.ScheduleDTO;
 import com.bootcamp.demo.demo_mtr_station.repository.LineRepository;
 import com.bootcamp.demo.demo_mtr_station.repository.StationRepository;
 import com.bootcamp.demo.demo_mtr_station.service.MtrService;
+
+import tools.jackson.databind.ObjectMapper;
 
 @Service
 public class MtrServiceImpl implements MtrService{
@@ -36,6 +41,10 @@ public class MtrServiceImpl implements MtrService{
 
   @Autowired
   private ModelMapper modelMapper;
+
+  @Autowired
+  // private RedisTemplate<String,String> redisTemplate;
+  private RedisManager redisManager;
 
   @Value(value = "${external-api.mtr.domain}")
     private String domain;
@@ -140,7 +149,41 @@ public ScheduleDTO getSchedule(String lineCode, String stationCode){
       return scheduleDTO;
       }
 
+//!part3 solution
+// @Override
+// public List<StationEntity> getStations(String lineCode){
+//   LineEntity lineEntity = this.lineRepository.findByCode(lineCode)//
+//                               .orElseThrow(()-> new IllegalArgumentException("Line code not found"));
+//   return this.stationRepository.findByLineEntity(lineEntity);
+// }
+//!------3/2/2026---------redis-------
+@Override
+public List<StationEntity> getStations(String lineCode){
+  //!1. read redis
+  String json = this.redisTemplate.opsForValue().get(lineCode);
+  
+  //!2.1 if redis found, return List<StationEntity>
+  if(json != null){
+  //Deserialization (String -> Java Object)
+  return Arrays.asList(new ObjectMapper().readValue(json, StationEntity[].class));
+   //eg. json: [{"name" : "John", "age" : 18},...] ->List<Person> class
+  }
+  else{
+  //!2.2 if redis not found, read Database -> write back redis -> return List<StationEntity>
+  LineEntity lineEntity = this.lineRepository.findByCode(lineCode)//
+                              .orElseThrow(()-> new IllegalArgumentException("Line code not found"));
+      List<StationEntity> stationEntities = this.stationRepository.findByLineEntity(lineEntity);
+      //Serialization (Java object -> String)
+     String jsonToWrite = new ObjectMapper().writeValueAsString(stationEntities);
+      this.redisTemplate.opsForValue().set(lineCode,jsonToWrite,Duration.ofSeconds(30));
+      return stationEntities;
+}
+//!very fast(<10ms, see postman), but only stand a while (duration: 30s, see redis-cli: get "LineCode")
+  }
 
+
+  
+  
 
       
     }
