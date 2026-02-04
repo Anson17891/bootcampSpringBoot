@@ -6,7 +6,9 @@ import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.web.client.RestTemplate;
+
 import com.bootcamp.demo.demo_mtr_station.codeLib.RedisManager;
+
 import tools.jackson.databind.ObjectMapper;
 @Configuration
 public class AppConfig {
@@ -19,7 +21,7 @@ public class AppConfig {
   //!--------3/2/2026-----redis---------------
   //agent to connect data to redis
   @Bean
-  ObjectMapper objectMapper{
+  ObjectMapper objectMapper() {
     return new ObjectMapper();
   }
 
