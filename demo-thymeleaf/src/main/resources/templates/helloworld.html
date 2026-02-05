@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+  <head>
+    <title>bootcamp</title>
+    <script th:src="@{/js/update-text.js}"></script>  <!-- attach html file-->
+  </head>
+  <body>
+    <h1>Biggest</h1> <!--H for heading-->
+    <h2>Java</h2>
+    <h3>Python</h3>
+    <p>Welcome to Bootcamp</p>  <!--p for paragraph -->
+    <p th:text="'Programming Language=' + ${programming}"></p>   <!--   server side rendering -->
+    
+    <input type="text" id="input-Box">
+    <button onclick="updateText()">Update</button>
+    <p id="status">Original Value</p>
+
+
+    <table>
+      <thead>  <!-- t head-->
+        <tr>
+          <th>ID</th>
+          <th>Image</th>
+          <th>Current Price</th>
+        </tr>
+      </thead>
+      <tbody>  <!-- t body-->
+        <tr th:each="coin : ${coinList}">
+          <td th:text="${coin.name}"></td>
+          <td><img th:src="${coin.image}" height = "30"></td>
+          <td th:text="${coin.currentPrice}"></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <table>
+      <tr>  <!-- row-->
+        <th>Name</th>  <!-- heading-->
+        <th>Age</th>
+      </tr>
+      <tr>
+        <td>Tommy</td>  <!-- column-->
+        <td>20</td>
+      </tr>
+      <tr>
+        <td>Steven</td>
+        <td>19</td>
+      </tr>
+    </table>
+  </body>
+</html>
