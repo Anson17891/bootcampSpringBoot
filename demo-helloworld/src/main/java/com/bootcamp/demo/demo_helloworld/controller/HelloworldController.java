@@ -10,15 +10,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @ResponseBody
 public class HelloworldController {
   
-  //! Bridge between client side and server side -> API
-@GetMapping(value = "/bootcamp") // "/" is needed    try: "/hongkong/bootcamp" + change web address
-  public String hello(){
-    System.out.println("How are you?"); //! not shown in client side, only in gitbash/log
-    //2ms, not used in normal case
-    //-> use in error case (try/catch)
-    return "Helloworld";
+//   //! Bridge between client side and server side -> API
+// @GetMapping(value = "/bootcamp") // "/" is needed    try: "/hongkong/bootcamp" + change web address
+//   public String helloWorld(){
+//     System.out.println("How are you?"); //! not shown in client side, only in gitbash/log
+//     //2ms, not used in normal case
+//     //-> use in error case (try/catch)
+//     return "Helloworld";
 
-  }
+//   }
     //save .java, gitbash: cd to folder, mvn spring-boot:run (run .jar)  start server
     //go to http://localhost:8080/bootcamp   <---client side
                               // ^ value = "/bootcamp"
@@ -31,5 +31,15 @@ public class HelloworldController {
     //client A <---double ticks---Whatsapp server <---Readed---clientB
 
 
+    //! aws   7/2/2026------------------------
+@GetMapping(value = "/hello/java") 
+  public String hello(){
+    return "Helloworld";
+  }
+
+  @GetMapping(value = "/hello/python") 
+  public String goodbye(){
+    return "GoodBye";
+  }
   }
 
