@@ -1,4 +1,4 @@
-package com.bootcamp.demo.model;
+package com.bootcamp.demo.demo_thymeleaf.model.dto;
 
 import java.time.LocalDateTime;
 
