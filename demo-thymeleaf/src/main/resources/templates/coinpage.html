@@ -1,28 +1,14 @@
 <!DOCTYPE html>
   <head>
     <title>bootcamp</title>
+    <link rel="stylesheet" href="/css/style.css">
     <script src="@{http://code.jquery.com/jquery-3.1.1.min.js}"></script>  <!-- refer external function -> ajex-->
     <script th:src="@{/js/update-text.js}"></script>  <!-- attach html file-->
     <script th:src="@{/js/coin-search.js}"></script>
     <script th:src="@{/js/coin-table-update.js}"></script>
   </head>
   <body>
-    <h1>Biggest</h1> <!--H for heading-->
-    <h2>Java</h2>
-    <h3>Python</h3>
-    <p>Welcome to Bootcamp</p>  <!--p for paragraph -->
-    <p th:text="'Programming Language=' + ${programming}"></p>   <!--   server side rendering -->
-    
-    <input type="text" id="input-Box">
-    <button onclick="updateText()">Update</button>
-    <p id="status">Original Value</p>
-
-    
-    <input type="text" id="coinSearch">  <!-- id for matching javascrpit-->
-    <div></div>
-
-
-    <table>
+    <table class="styled-table">
       <thead>  <!-- t head-->
         <tr >
           <th>Coin</th>
@@ -35,20 +21,21 @@
         <tr th:attr="data-coin-id=${coin.id}" th:each="coin : ${coinList}" class="coinRow">   <!-- th:attr... -> connect coin-table.update line10-->
           
           <td>
-           <div>  <!-- dialog: treat as a block-->
-             <div>  
-              <td><img th:src="${coin.image}" height="30"></td>
-              <td th:text="${coin.name}"></td>
-              <td th:text="${coin.symbol}"></td>
+           <div class="coin-info">  <!-- dialog: treat as a block-->
+             <div class="coin-details">  
+              <img class="coin-image" th:src="${coin.image}">
+              <span class="coin-name" th:text="${coin.name}"></span>
+              <span class="coin-symbol" th:text="${coin.symbol}"></span>
              </div>
-             <div class="last-updated" th:text="${#temporals.format(coin.lastUpdate, 'yyyy-MM-dd HH:mm:ss')} + ' HKT'">   <!-- or inside div<td ....></td> -->
+             <div> 
+              <span  class="last-updated" th:text="${#temporals.format(coin.lastUpdate, 'yyyy/MM/dd HH:mm:ss')} + ' HKT'">
+              </span>
              </div>   <!-- class: a tag for js to identify ->coin-table.update line14-->
            </div>
           </td>
              <!-- Coin column: row1:image, coin name, coin code, row2: last update-->
-            
 
-          <td th:text="'$' + ${#numbers.formatDecimal(coin.currentPrice,1,'COMMA',0,'POINT')}"></td>
+          <td class="current-price" th:text="'$' + ${#numbers.formatDecimal(coin.currentPrice,1,'COMMA',0,'POINT')}"></td>
           <td>
           <span th:with="roundedPercent = ${T(java.lang.Math).round(coin.priceChangePercentage24h * 100.0) / 100.0}"  
             th:class="${'price-change '+(roundedPercent > 0 ? 'up': (roundedPercent < 0 ? 'down' : 'neutral'))}">                         <!-- call java function, *100,round,/100-->
@@ -56,7 +43,7 @@
             <span th:text="${#numbers.formatDecimal(T(java.lang.Math).abs(roundedPercent),1,'COMMA',2,'POINT')} + '%'"></span>
           </span>
           </td>
-          <td th:text="'$' + ${#numbers.formatDecimal(coin.marketCap,1,'COMMA',0,'POINT')}"></td>
+          <td class="market-cap" th:text="'$' + ${#numbers.formatDecimal(coin.marketCap,1,'COMMA',0,'POINT')}"></td>
         </tr>
       </tbody>
     </table>

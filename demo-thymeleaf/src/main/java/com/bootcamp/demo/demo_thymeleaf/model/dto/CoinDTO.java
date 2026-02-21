@@ -13,7 +13,7 @@ public class CoinDTO {
   private String name;
   private String image;
   @JsonProperty(value = "current_price")
-  private Long currentPrice;
+  private Double currentPrice;
   @JsonProperty(value = "market_cap")
   private String marketCap;
   @JsonProperty(value = "market_cap_rank")

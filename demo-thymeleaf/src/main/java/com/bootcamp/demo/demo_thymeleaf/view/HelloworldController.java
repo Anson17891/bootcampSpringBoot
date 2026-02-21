@@ -12,6 +12,7 @@ import com.bootcamp.demo.demo_thymeleaf.service.CoinService;
 
 
 
+
 @Controller  // return non-json (html, xml, etc)
 public class HelloworldController {
 
@@ -29,10 +30,16 @@ public class HelloworldController {
       //check http://localhost:8080/hello
   }
   
-  @GetMapping("/refresh")
-  public String refresh(Model model) {
-      return "helloworld";
+
+  @GetMapping(value = "/coinpage")
+  public String coinPage(Model model) {
+      List<CoinDTO> coinDTOs = this.coinService.getCoins();
+    model.addAttribute("coinList", coinDTOs);
+    model.addAttribute("programming","Java"); 
+    return "coinpage"; 
+  }
+  
   }
   
   
-}
+
