@@ -16,3 +16,5 @@ external-api:
     domain: "api.coingecko.com"
     path-segment: "api/v3/coins/markets"
     
+server:
+  port: 8090

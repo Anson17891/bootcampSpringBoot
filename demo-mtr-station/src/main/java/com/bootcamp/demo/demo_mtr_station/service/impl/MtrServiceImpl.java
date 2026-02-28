@@ -24,8 +24,6 @@ import com.bootcamp.demo.demo_mtr_station.repository.LineRepository;
 import com.bootcamp.demo.demo_mtr_station.repository.StationRepository;
 import com.bootcamp.demo.demo_mtr_station.service.MtrService;
 
-import tools.jackson.databind.ObjectMapper;
-
 @Service
 public class MtrServiceImpl implements MtrService{
   //encapsulate appStater
@@ -183,15 +181,18 @@ public ScheduleDTO getSchedule(String lineCode, String stationCode){
 
 @Override
 public List<StationEntity> getStations(String lineCode){
-  List<StationEntity> stationEntities = Arrays.asList(this.redisManager.get(lineCode,StationEntity[].class));
-  if(stationEntities==null){
+  StationEntity[] stationEntities = this.redisManager.get(lineCode,StationEntity[].class);
+  if(stationEntities != null){
+    return Arrays.asList(stationEntities);
+  }
+  else{
     LineEntity lineEntity = this.lineRepository.findByCode(lineCode)//
                              .orElseThrow(()-> new IllegalArgumentException("Line code not found"));
-     stationEntities = this.stationRepository.findByLineEntity(lineEntity);
-      String jsonToWrite = new ObjectMapper().writeValueAsString(stationEntities);
-      this.redisManager.set(lineCode, jsonToWrite,Duration.ofSeconds(30));
-  }
-  return stationEntities;
+     List<StationEntity> stationEntitiesFromDB = this.stationRepository.findByLineEntity(lineEntity);
+      this.redisManager.set(lineCode, stationEntitiesFromDB,Duration.ofSeconds(30));
+  
+  return stationEntitiesFromDB;
+}
 }
 
 

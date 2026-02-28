@@ -35,7 +35,6 @@ public class HelloworldController {
   public String coinPage(Model model) {
       List<CoinDTO> coinDTOs = this.coinService.getCoins();
     model.addAttribute("coinList", coinDTOs);
-    model.addAttribute("programming","Java"); 
     return "coinpage"; 
   }
   

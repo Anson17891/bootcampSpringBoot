@@ -1,5 +1,5 @@
 function formatDate(lastUpdated){
-  var date = new Date(lastUpdated); //lastUpdated is a String
+  var date = new Date(lastUpdated); //lastUpdated"2026-02-21T12:09:32.267" is a String
   var year = date.getFullYear();
   var month = ("0" + (date.getMonth() + 1)).slice(-2);  //january=0, so need to +1
   var day = ("0" + date.getDate()).slice(-2);
